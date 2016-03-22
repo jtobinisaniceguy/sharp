@@ -13,5 +13,10 @@ addons:
     - g++-4.8
 env:
   CXX=g++-4.8
+os:
+  - linux
+  - osx
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew tap homebrew/science && brew update && brew install vips --with-webp --with-graphicsmagick; fi
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
